@@ -48,7 +48,7 @@ The project follows a comprehensive machine learning pipeline including the foll
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
     - Data.txt/ # Input data
     - Distribution in variables.pdf # EDA: distribution and analysis of variables
