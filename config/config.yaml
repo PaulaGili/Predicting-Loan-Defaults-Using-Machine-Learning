@@ -1,0 +1,104 @@
+data:
+  raw_path: "data/loan.csv"
+
+paths:
+  outputs: "outputs"
+  models: "models"
+  logs: "logs"
+
+preprocessing:
+  missing_threshold: 0.20
+
+  # Post-origination payment info — pure leakage, always drop these
+  leakage_columns:
+    - last_pymnt_amnt
+    - recoveries
+    - total_pymnt
+    - total_pymnt_inv
+    - total_rec_int
+    - total_rec_late_fee
+    - total_rec_prncp
+    - last_pymnt_d
+    - collection_recovery_fee
+    - out_prncp
+    - out_prncp_inv
+
+  # Identifiers, free-text, low-signal columns
+  id_columns:
+    - id
+    - member_id
+    - url
+    - issue_d
+    - earliest_cr_line
+    - grade         # sub_grade is strictly more granular, no need for both
+    - last_credit_pull_d
+    - emp_title
+    - title
+    - zip_code
+    - addr_state
+    - pymnt_plan
+    - policy_code
+    - acc_now_delinq
+
+  # Ordinal encoding for sub_grade (A1=0 ... G5=34)
+  sub_grade_order:
+    - A1
+    - A2
+    - A3
+    - A4
+    - A5
+    - B1
+    - B2
+    - B3
+    - B4
+    - B5
+    - C1
+    - C2
+    - C3
+    - C4
+    - C5
+    - D1
+    - D2
+    - D3
+    - D4
+    - D5
+    - E1
+    - E2
+    - E3
+    - E4
+    - E5
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - G1
+    - G2
+    - G3
+    - G4
+    - G5
+
+training:
+  test_size: 0.20
+  random_seed: 42
+  n_splits: 5
+
+optuna:
+  n_trials: 50
+  timeout: null
+
+# Set enabled: false to skip a model entirely
+models:
+  logistic_regression:
+    enabled: true
+    max_iter: 2000
+  random_forest:
+    enabled: true
+  xgboost:
+    enabled: true
+  lightgbm:
+    enabled: true
+  hist_gradient_boosting:
+    enabled: true
+  stacking:
+    enabled: true   # ensemble: RF + XGB + LGBM -> LogReg meta-learner
