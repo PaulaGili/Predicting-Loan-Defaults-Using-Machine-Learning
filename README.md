@@ -107,7 +107,7 @@ The input CSV must have the same columns as the training data after preprocessin
 pytest tests/ -v
 ```
 
-Tests use synthetic DataFrames — no need to download the full dataset.
+Tests use synthetic DataFrames, no need to download the full dataset.
 
 ---
 
@@ -121,7 +121,7 @@ The dataset is LendingClub's public loan data (~887k loans). Place `loan.csv` in
 
 After filtering to loans with known outcomes (Fully Paid / Charged Off), the working dataset was 242,826 records with a 17.6% default rate.
 
-All three gradient boosting models clustered within 0.001 AUC of each other (0.715–0.716), with LightGBM marginally ahead at 0.7164. The gap between the best and worst model is small, which suggests the ceiling here is more a data limitation than a modelling one — loan default involves a lot of variance that the available features simply don't capture.
+All three gradient boosting models clustered within 0.001 AUC of each other (0.715–0.716), with LightGBM marginally ahead at 0.7164. The gap between the best and worst model is small, which suggests the ceiling here is more a data limitation than a modelling one, loan default involves a lot of variance that the available features simply don't capture.
 
 A few things that stood out:
 
