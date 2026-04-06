@@ -126,7 +126,7 @@ All three gradient boosting models clustered within 0.001 AUC of each other (0.7
 A few things that stood out:
 
 - **The 0.5 threshold is basically useless here.** At the default cutoff the model barely flags any defaults. After tuning to the F1-optimal threshold, recall jumps substantially. This is the most practical takeaway of the whole project.
-- **SHAP top features: `int_rate`, `revol_util`, and `funded_amnt_inv`.** The interest rate is effectively the market's own risk estimate baked into the loan terms, so it dominating makes complete sense. Revolving utilization captures how stretched a borrower is relative to their credit limits — a strong behavioral signal that precedes default.
+- **SHAP top features: `int_rate`, `revol_util`, and `funded_amnt_inv`.** The interest rate is effectively the market's own risk estimate baked into the loan terms, so it dominating makes complete sense. Revolving utilization captures how stretched a borrower is relative to their credit limits, a strong behavioral signal that precedes default.
 - **Stacking (0.7128) doesn't beat LightGBM on its own (0.7164)**, which is typical when base learners are already well-tuned and highly correlated. Passing the original features through to the meta-learner (`passthrough=True`) and using tuned Optuna params for the base models pushed it meaningfully above the earlier untuned version.
 - **`scale_pos_weight` replaced SMOTE for the boosting models.** Letting the loss function handle the imbalance directly, rather than synthetically oversampling, gave cleaner and faster results for LightGBM and XGBoost.
 
