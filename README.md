@@ -91,13 +91,13 @@ The input CSV must have the same columns as the training data after preprocessin
 
 ## Pipeline Overview
 
-1. **Preprocessing** — filter to individual loans with known outcomes (Fully Paid / Charged Off), drop high-missing and leakage columns
-2. **Feature engineering** — ordinal encoding, financial ratios (`loan_to_income`, `installment_pct_income`), credit behavior interactions (`dti_x_rate`, `util_x_subgrade`), one-hot encoding
-3. **Training** — 5 individual models + stacking ensemble; Optuna tunes hyperparameters via 5-fold stratified CV
-4. **Imbalance** — LightGBM and XGBoost use `scale_pos_weight`; other models use SMOTE inside CV folds
-5. **Evaluation** — ROC-AUC, PR curves, confusion matrices, optimal F1 threshold
-6. **Interpretability** — SHAP beeswarm and dependence plots for the best model
-7. **Tracking** — every run is logged to MLflow (`mlruns/`)
+1. **Preprocessing**: filter to individual loans with known outcomes (Fully Paid / Charged Off), drop high-missing and leakage columns
+2. **Feature engineering**: ordinal encoding, financial ratios (`loan_to_income`, `installment_pct_income`), credit behavior interactions (`dti_x_rate`, `util_x_subgrade`), one-hot encoding
+3. **Training**: 5 individual models + stacking ensemble; Optuna tunes hyperparameters via 5-fold stratified CV
+4. **Imbalance**: LightGBM and XGBoost use `scale_pos_weight`; other models use SMOTE inside CV folds
+5. **Evaluation**: ROC-AUC, PR curves, confusion matrices, optimal F1 threshold
+6. **Interpretability**: SHAP beeswarm and dependence plots for the best model
+7. **Tracking**: every run is logged to MLflow (`mlruns/`)
 
 ---
 
